@@ -2,6 +2,10 @@
   "name": "abd",
   "version": "0.0.0",
   "license": "MIT",
+  "engines": {
+    "node": "7.5.0",
+    "npm": "4.1.2"
+  },
   "scripts": {
     "start": "ts-node src/server.ts",
     "ng": "ng",
