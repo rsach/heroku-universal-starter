@@ -7,12 +7,24 @@ import * as express from 'express';
 import { readFileSync } from 'fs';
 import { join } from 'path';
 
-const PORT = 4000;
+const PORT = 443;
 
 enableProdMode();
 
 const app = express();
 
+
+const forceSSL = function() {
+  return function (req, res, next) {
+    if (req.headers['x-forwarded-proto'] !== 'https') {
+      return res.redirect(
+       ['https://', req.get('Host'), req.url].join('')
+      );
+    }
+    next();
+  }
+}
+app.use(forceSSL());
 let template = readFileSync(join(__dirname, '..', 'dist', 'index.html')).toString();
 
 app.engine('html', (_, options, callback) => {
