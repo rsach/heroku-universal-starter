@@ -7,7 +7,7 @@ import * as express from 'express';
 import { readFileSync } from 'fs';
 import { join } from 'path';
 
-const PORT = 80;
+const PORT = process.env.PORT || 8080;
 
 enableProdMode();
 
